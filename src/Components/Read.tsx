@@ -31,19 +31,14 @@ const Read = () => {
 
   return (
     <>
-      <button className="bg-black hover:bg-gray-800 text-white font-bold py-2 px-4 rounded" type="button" onClick={openModal}>View All Apistogrammas</button>
-      <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
-        <h2>Apistogramma Fish</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Origin</th>
-              <th>Size</th>
-              <th>pH</th>
-            </tr>
-          </thead>
-          <tbody>
+      <div className="flex justify-center">
+        <button className="bg-black hover:bg-gray-800 text-white font-bold py-2 px-4 rounded" type="button" onClick={openModal}>View All Apistogrammas</button>
+      </div>
+      
+      <Modal isOpen={modalIsOpen} className="fixed inset-0 flex items-center justify-center">
+        <div className="bg-white rounded-lg shadow-lg p-6 w-1/2 h-1/2 relative flex flex-col">
+          <h2>Apistogramma Fish</h2>
+          <div className="flex-1 mb-4">
             {fish.map((fish) => (
               <tr key={fish.name}>
                 <td>{fish.name}</td>
@@ -52,9 +47,9 @@ const Read = () => {
                 <td>{fish.pH}</td>
               </tr>
             ))}
-          </tbody>
-        </table>
-        <button onClick={closeModal}>Close</button>
+          </div>
+          <button className="bg-black hover:bg-gray-800 text-white font-bold py-2 px-4 rounded absolute bottom-0 left-1/2 transform -translate-x-1/2 mb-4" onClick={closeModal}>Close</button>
+        </div>
       </Modal>
     </>
   );
