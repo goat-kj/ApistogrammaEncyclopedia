@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import axios from 'axios';
+import Card from './Card';
 
 interface Fish {
   name: string;
@@ -48,6 +49,7 @@ const Read = () => {
               </tr>
             ))}
           </div>
+          <Card />
           <button className="bg-black hover:bg-gray-800 text-white font-bold py-2 px-4 rounded absolute bottom-0 left-1/2 transform -translate-x-1/2 mb-4" onClick={closeModal}>Close</button>
         </div>
       </Modal>

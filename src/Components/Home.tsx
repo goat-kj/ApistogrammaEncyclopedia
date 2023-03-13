@@ -21,13 +21,13 @@ const Home = () => {
 
   return (
     <>
-      <div className="flex items-center justify-center py-6">
-        <button className="bg-black hover:bg-gray-800 text-white font-bold py-2 px-4 rounded" type="button" onClick={toggleAccordion}>
+      <div className="flex items-center justify-center py-6" >
+        <button className="bg-black hover:bg-gray-800 text-white font-bold py-2 px-4 rounded transition-all duration-500" type="button" onClick={toggleAccordion}>
           {accordionIsOpen ? 'Hide' : 'Click for Info'}
         </button>
       </div>
 
-      {accordionIsOpen &&
+      <div style={{ maxHeight: accordionIsOpen ? '1000px' : '0', overflow: 'hidden', transition: 'max-height 0.5s ease-in-out' }}>
         <div className="bg-white p-6 w-full items-center justify-center relative flex flex-col mt-4">
           <div className="text-lg font-serif flex-1 mb-4">
             <p>
@@ -44,7 +44,8 @@ const Home = () => {
             </p>
           </div>
         </div>
-      }
+      </div>
+      
       <div className=" bg-white shadow-md rounded pb-4 mb-4" />
       <Read />
 
