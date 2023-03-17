@@ -7,6 +7,7 @@ interface Fish {
   origin: string;
   size: string;
   pH: string;
+  image: string;
 }
 
 interface RouteParams {
@@ -14,10 +15,9 @@ interface RouteParams {
   [key: string]: string | undefined;
 }
 
-
 const Update: React.FC = () => {
   const { id } = useParams<RouteParams>();
-  const fishId = id ?? '';
+  const fishId = id ?? "";
 
   const navigate = useNavigate();
 
@@ -25,6 +25,7 @@ const Update: React.FC = () => {
   const [origin, setOrigin] = useState("");
   const [size, setSize] = useState("");
   const [pH, setpH] = useState("");
+  const [image, setImage] = useState("");
 
   const [fishList, setFishList] = useState<Fish[]>([]);
 
@@ -32,7 +33,7 @@ const Update: React.FC = () => {
     // Fetch the fish list and set the state
     const fetchFishList = async () => {
       try {
-        const response = await fetch("/fish");
+        const response = await fetch("/all");
         const data = await response.json();
         setFishList(data);
       } catch (error) {
@@ -50,6 +51,7 @@ const Update: React.FC = () => {
       setOrigin(selectedFish.origin);
       setSize(selectedFish.size);
       setpH(selectedFish.pH);
+      setImage(selectedFish.image);
     }
   }, [fishList, id]);
 
@@ -60,12 +62,12 @@ const Update: React.FC = () => {
       const response = await fetch(`http://localhost:4000/update/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, origin, size, pH }),
+        body: JSON.stringify({ name, origin, size, pH, image }),
       });
       if (response.ok) {
         const updatedFishList = fishList.map((fish) =>
           fish.id === parseInt(fishId)
-            ? { id: fish.id, name, origin, size, pH }
+            ? { id: fish.id, name, origin, size, pH, image }
             : fish
         );
         setFishList(updatedFishList);
@@ -77,45 +79,65 @@ const Update: React.FC = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleUpdate}>
-        <div>
-          <label htmlFor="name">Name:</label>
+    <div className="flex flex-col items-center">
+      <h1 className="text-2xl font-bold mb-4">Update This Fish</h1>
+      <form onSubmit={handleUpdate} className="flex flex-col space-y-2">
+        <label className="flex flex-col" htmlFor="name">
+          <span className="font-bold">Name:</span>
           <input
             type="text"
             id="name"
             value={name}
             onChange={(event) => setName(event.target.value)}
+            className="border border-gray-300 rounded-md p-2"
           />
-        </div>
-        <div>
-          <label htmlFor="origin">Origin:</label>
+        </label>
+        <label className="flex flex-col" htmlFor="origin">
+          <span className="font-bold">Origin:</span>
           <input
             type="text"
             id="origin"
             value={origin}
             onChange={(event) => setOrigin(event.target.value)}
+            className="border border-gray-300 rounded-md p-2"
           />
-        </div>
-        <div>
-          <label htmlFor="size">Size:</label>
+        </label>
+        <label className="flex flex-col" htmlFor="size">
+          <span className="font-bold">Size:</span>
           <input
             type="text"
             id="size"
             value={size}
             onChange={(event) => setSize(event.target.value)}
+            className="border border-gray-300 rounded-md p-2"
           />
-        </div>
-        <div>
-          <label htmlFor="pH">pH:</label>
+        </label>
+        <label className="flex flex-col" htmlFor="pH">
+          <span className="font-bold">pH:</span>
           <input
             type="text"
             id="pH"
             value={pH}
             onChange={(event) => setpH(event.target.value)}
+            className="border border-gray-300 rounded-md p-2"
           />
-        </div>
-        <button type="submit">Update Fish</button>
+        </label>
+        <label className="flex flex-col" htmlFor="image">
+          <span className="font-bold">Image URL:</span>
+          <input
+            type="text"
+            id="image"
+            value={image}
+            onChange={(event) => setImage(event.target.value)}
+            className="border border-gray-300 rounded-md p-2"
+          />
+        </label>
+        <button
+          type="submit"
+          className="bg-black hover:bg-gray-800 text-white font-bold py-2 px-4 rounded"
+        >
+          Update
+        </button>
       </form>
     </div>
   );

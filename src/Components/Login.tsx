@@ -3,7 +3,7 @@ import React from 'react'
 const Login = () => {
   return (
     <div>
-      <label>
+      <label className="font-sans">
         Username
       </label>
       <input>

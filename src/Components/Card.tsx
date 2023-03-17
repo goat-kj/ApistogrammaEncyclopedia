@@ -1,5 +1,6 @@
 import React from 'react'
-import logo from '/Users/kjhan/Desktop/api_enc/apisto_enc/src/example.png'
+import logo from 'src/example.png'
+
 
 const Card = () => {
   return (
