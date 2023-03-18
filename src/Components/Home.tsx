@@ -1,19 +1,10 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
 import Read from './Read';
+import AmazonMap from '../Images/AmazonMap.png'; // import the image here
 
 const Home = () => {
-
-  const [modalIsOpen, setModalIsOpen] = useState(false);
   const [accordionIsOpen, setAccordionIsOpen] = useState(false);
-
-  const openModal = () => {
-    setModalIsOpen(true);
-  };
-
-  const closeModal = () => {
-    setModalIsOpen(false);
-  };
 
   const toggleAccordion = () => {
     setAccordionIsOpen(!accordionIsOpen);
@@ -21,7 +12,7 @@ const Home = () => {
 
   return (
     <>
-      <div className="flex items-center justify-center py-6" >
+      <div className="flex flex-col items-center justify-center py-6" >
         <button className="bg-black hover:bg-gray-800 text-white font-bold py-2 px-4 rounded transition-all duration-500" type="button" onClick={toggleAccordion}>
           {accordionIsOpen ? 'Hide' : 'Click for Info'}
         </button>
@@ -45,10 +36,10 @@ const Home = () => {
           </div>
         </div>
       </div>
-      
-      <div className=" bg-white shadow-md rounded pb-4 mb-4" />
+      <div className="flex flex-col items-center justify-center">
       <Read />
-
+      <img src={AmazonMap} alt="Amazon Map" />
+      </div>
     </>
   );
 
