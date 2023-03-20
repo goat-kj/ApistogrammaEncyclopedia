@@ -1,12 +1,8 @@
 import React, { useState } from 'react';
-import Modal from 'react-modal';
 import Read from './Read';
-import AmazonMap from '../Images/AmazonMap.png'; // import the image here
+import AmazonMap from '../Images/AmazonMap.svg.png'; // import the image here
 import '../Styles.css';
 
-interface HomeProps {
-  origin: string;
-};
 
 const Home = () => {
   const [accordionIsOpen, setAccordionIsOpen] = useState(false);
@@ -27,10 +23,6 @@ const Home = () => {
   const toggleAccordion = () => {
     setAccordionIsOpen(!accordionIsOpen);
   };
-
-  const handleClick = () => {
-    console.log("clicked");
-  }
 
   return (
     <>
@@ -66,7 +58,19 @@ const Home = () => {
       )}
       <img src={AmazonMap} alt="Amazon Map" useMap="#amazonMap" className="rounded-lg shadow-lg py-4" />
       <map name="amazonMap">
-        <area shape="rect" coords="280, 345, 600, 560" onMouseOver={() => setTransform(true)} onMouseOut={() => setTransform(false)} style={transform ? { transform: 'scale(1.2)', cursor: 'pointer' } : { cursor: 'default' }} onClick={() => openModal('all')} />
+        <area shape="circle" coords="343,260,27" onMouseOver={() => setTransform(true)} onMouseOut={() => setTransform(false)} style={transform ? { transform: 'scale(1.2)', cursor: 'pointer' } : { cursor: 'default' }} onClick={() => openModal('Negro')} />
+        <area shape="circle" coords="403,375,28" onMouseOver={() => setTransform(true)} onMouseOut={() => setTransform(false)} style={transform ? { transform: 'scale(1.2)', cursor: 'pointer' } : { cursor: 'default' }} onClick={() => openModal('Madeira')} />
+        <area shape="circle" coords="486,372,28" onMouseOver={() => setTransform(true)} onMouseOut={() => setTransform(false)} style={transform ? { transform: 'scale(1.2)', cursor: 'pointer' } : { cursor: 'default' }} onClick={() => openModal('Tapajos')} />
+        <area shape="circle" coords="575,475,26" onMouseOver={() => setTransform(true)} onMouseOut={() => setTransform(false)} style={transform ? { transform: 'scale(1.2)', cursor: 'pointer' } : { cursor: 'default' }} onClick={() => openModal('Xingu')} />
+        <area shape="circle" coords="331,397,23" onMouseOver={() => setTransform(true)} onMouseOut={() => setTransform(false)} style={transform ? { transform: 'scale(1.2)', cursor: 'pointer' } : { cursor: 'default' }} onClick={() => openModal('Purus')} />
+        <area shape="circle" coords="257,391,25" onMouseOver={() => setTransform(true)} onMouseOut={() => setTransform(false)} style={transform ? { transform: 'scale(1.2)', cursor: 'pointer' } : { cursor: 'default' }} onClick={() => openModal('Jurua')} />
+        <area shape="circle" coords="671,476,25" onMouseOver={() => setTransform(true)} onMouseOut={() => setTransform(false)} style={transform ? { transform: 'scale(1.2)', cursor: 'pointer' } : { cursor: 'default' }} onClick={() => openModal('Tocantins')} />
+        <area shape="circle" coords="618,526,28" onMouseOver={() => setTransform(true)} onMouseOut={() => setTransform(false)} style={transform ? { transform: 'scale(1.2)', cursor: 'pointer' } : { cursor: 'default' }} onClick={() => openModal('Araguaia')} />
+        <area shape="circle" coords="605,258,15" onMouseOver={() => setTransform(true)} onMouseOut={() => setTransform(false)} style={transform ? { transform: 'scale(1.2)', cursor: 'pointer' } : { cursor: 'default' }} onClick={() => openModal('Jari')} />
+        <area shape="circle" coords="520,258,24" onMouseOver={() => setTransform(true)} onMouseOut={() => setTransform(false)} style={transform ? { transform: 'scale(1.2)', cursor: 'pointer' } : { cursor: 'default' }} onClick={() => openModal('Trombetas')} />
+        <area shape="circle" coords="398,514,26" onMouseOver={() => setTransform(true)} onMouseOut={() => setTransform(false)} style={transform ? { transform: 'scale(1.2)', cursor: 'pointer' } : { cursor: 'default' }} onClick={() => openModal('Guapore')} />
+        <area shape="circle" coords="569,241,17" onMouseOver={() => setTransform(true)} onMouseOut={() => setTransform(false)} style={transform ? { transform: 'scale(1.2)', cursor: 'pointer' } : { cursor: 'default' }} onClick={() => openModal('Paru')} />
+        <area shape="circle" coords="156,429,25" onMouseOver={() => setTransform(true)} onMouseOut={() => setTransform(false)} style={transform ? { transform: 'scale(1.2)', cursor: 'pointer' } : { cursor: 'default' }} onClick={() => openModal('Ucayali')} />
       </map>
       </div>
     </div>

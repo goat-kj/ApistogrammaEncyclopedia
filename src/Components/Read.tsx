@@ -71,7 +71,7 @@ const Read: React.FC<ReadProps> = ({ origin, closeModal }) => {
           style={{ maxHeight: `${modalHeight}px`, overflowY: 'auto' }}
         >
           <div className="modal-header text-center">
-            <h2>Apistogramma Fish</h2>
+            <h2 className="text-lg font-serif">{origin}</h2>
           </div>
           <div className="flex-1 mb-4">
           {fish
@@ -94,7 +94,7 @@ const Read: React.FC<ReadProps> = ({ origin, closeModal }) => {
       <div className="w-1/2 p-6">
         <h2 className="text-xl font-bold mb-2">{fish.name}</h2>
         <p className="text-gray-700 text-base">
-          Origin: {fish.origin}
+          Origin: {fish.origin} River
         </p>
         <p className="text-gray-700 text-base">
           Size: {fish.size}cm
