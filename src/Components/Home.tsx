@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Read from './Read';
-import AmazonMap from '../Images/AmazonMap.svg.png'; // import the image here
+import AmazonMap from '../Images/AmazonMap.svg.svg';
 import '../Styles.css';
 
 
@@ -10,6 +10,7 @@ const Home = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedOrigin, setSelectedOrigin] = useState('all');
+  
 
   const openModal = (origin: string) => {
     setSelectedOrigin(origin);
@@ -24,6 +25,10 @@ const Home = () => {
     setAccordionIsOpen(!accordionIsOpen);
   };
 
+  const handleClick = () => {
+    console.log("clicked");
+  };
+
   return (
     <>
     <div className="bg-gray-100">
@@ -34,7 +39,7 @@ const Home = () => {
       </div>
 
       <div style={{ maxHeight: accordionIsOpen ? '1000px' : '0', overflow: 'hidden', transition: 'max-height 0.5s ease-in-out' }}>
-        <div className="bg-white p-6 w-full items-center justify-center relative flex flex-col mt-4 shadow-lg rounded-lg">
+        <div className="bg-gray-100 p-6 w-full items-center justify-center relative flex flex-col mt-4 shadow-lg rounded-lg">
           <div className="text-lg font-serif flex-1 mb-4">
             <p>
               Apistogramma is a genus of freshwater fish in the cichlid family, native to South America. These fish are popular in the aquarium hobby due to their beautiful colors and interesting behavior.
@@ -56,22 +61,27 @@ const Home = () => {
       {isModalOpen && (
         <Read origin={selectedOrigin} closeModal={closeModal} />
       )}
-      <img src={AmazonMap} alt="Amazon Map" useMap="#amazonMap" className="rounded-lg shadow-lg py-4" />
-      <map name="amazonMap">
-        <area shape="circle" coords="343,260,27" onMouseOver={() => setTransform(true)} onMouseOut={() => setTransform(false)} style={transform ? { transform: 'scale(1.2)', cursor: 'pointer' } : { cursor: 'default' }} onClick={() => openModal('Negro')} />
-        <area shape="circle" coords="403,375,28" onMouseOver={() => setTransform(true)} onMouseOut={() => setTransform(false)} style={transform ? { transform: 'scale(1.2)', cursor: 'pointer' } : { cursor: 'default' }} onClick={() => openModal('Madeira')} />
-        <area shape="circle" coords="486,372,28" onMouseOver={() => setTransform(true)} onMouseOut={() => setTransform(false)} style={transform ? { transform: 'scale(1.2)', cursor: 'pointer' } : { cursor: 'default' }} onClick={() => openModal('Tapajos')} />
-        <area shape="circle" coords="575,475,26" onMouseOver={() => setTransform(true)} onMouseOut={() => setTransform(false)} style={transform ? { transform: 'scale(1.2)', cursor: 'pointer' } : { cursor: 'default' }} onClick={() => openModal('Xingu')} />
-        <area shape="circle" coords="331,397,23" onMouseOver={() => setTransform(true)} onMouseOut={() => setTransform(false)} style={transform ? { transform: 'scale(1.2)', cursor: 'pointer' } : { cursor: 'default' }} onClick={() => openModal('Purus')} />
-        <area shape="circle" coords="257,391,25" onMouseOver={() => setTransform(true)} onMouseOut={() => setTransform(false)} style={transform ? { transform: 'scale(1.2)', cursor: 'pointer' } : { cursor: 'default' }} onClick={() => openModal('Jurua')} />
-        <area shape="circle" coords="671,476,25" onMouseOver={() => setTransform(true)} onMouseOut={() => setTransform(false)} style={transform ? { transform: 'scale(1.2)', cursor: 'pointer' } : { cursor: 'default' }} onClick={() => openModal('Tocantins')} />
-        <area shape="circle" coords="618,526,28" onMouseOver={() => setTransform(true)} onMouseOut={() => setTransform(false)} style={transform ? { transform: 'scale(1.2)', cursor: 'pointer' } : { cursor: 'default' }} onClick={() => openModal('Araguaia')} />
-        <area shape="circle" coords="605,258,15" onMouseOver={() => setTransform(true)} onMouseOut={() => setTransform(false)} style={transform ? { transform: 'scale(1.2)', cursor: 'pointer' } : { cursor: 'default' }} onClick={() => openModal('Jari')} />
-        <area shape="circle" coords="520,258,24" onMouseOver={() => setTransform(true)} onMouseOut={() => setTransform(false)} style={transform ? { transform: 'scale(1.2)', cursor: 'pointer' } : { cursor: 'default' }} onClick={() => openModal('Trombetas')} />
-        <area shape="circle" coords="398,514,26" onMouseOver={() => setTransform(true)} onMouseOut={() => setTransform(false)} style={transform ? { transform: 'scale(1.2)', cursor: 'pointer' } : { cursor: 'default' }} onClick={() => openModal('Guapore')} />
-        <area shape="circle" coords="569,241,17" onMouseOver={() => setTransform(true)} onMouseOut={() => setTransform(false)} style={transform ? { transform: 'scale(1.2)', cursor: 'pointer' } : { cursor: 'default' }} onClick={() => openModal('Paru')} />
-        <area shape="circle" coords="156,429,25" onMouseOver={() => setTransform(true)} onMouseOut={() => setTransform(false)} style={transform ? { transform: 'scale(1.2)', cursor: 'pointer' } : { cursor: 'default' }} onClick={() => openModal('Ucayali')} />
-      </map>
+      
+      <svg viewBox="0 0 1400 800" width="100%" height="100%">
+        <image
+          width="1400"
+          height="800"
+          xlinkHref={AmazonMap}  
+        />
+        <circle cx="640" cy="260" r="20" onClick={() => openModal('Negro')} style={{ cursor: 'pointer', opacity: 0 }} />
+        <circle cx="710" cy="370" r="20" fill="red" onClick={() => openModal('Madeira')} style={{ cursor: 'pointer', opacity: 0 }} />
+        <circle cx="790" cy="370" r="20" fill="red" onClick={() => openModal('Tapajos')} style={{ cursor: 'pointer', opacity: 0 }} />
+        <circle cx="880" cy="480" r="20" fill="red" onClick={() => openModal('Xingu')} style={{ cursor: 'pointer', opacity: 0 }} />
+        <circle cx="640" cy="400" r="20" fill="red" onClick={() => openModal('Purus')} style={{ cursor: 'pointer', opacity: 0 }} />
+        <circle cx="560" cy="400" r="20" fill="red" onClick={() => openModal('Jurua')} style={{ cursor: 'pointer', opacity: 0 }} />
+        <circle cx="970" cy="470" r="20" fill="red" onClick={() => openModal('Tocantins')} style={{ cursor: 'pointer', opacity: 0 }} />
+        <circle cx="920" cy="530" r="20" fill="red" onClick={() => openModal('Araguaia')} style={{ cursor: 'pointer', opacity: 0 }} />
+        <circle cx="910" cy="260" r="20" fill="red" onClick={() => openModal('Jari')} style={{ cursor: 'pointer', opacity: 0 }} />
+        <circle cx="820" cy="260" r="20" fill="red" onClick={() => openModal('Trombetas')} style={{ cursor: 'pointer', opacity: 0 }} />
+        <circle cx="700" cy="520" r="20" fill="red" onClick={() => openModal('Guapore')} style={{ cursor: 'pointer', opacity: 0 }} />
+        <circle cx="870" cy="250" r="20" fill="red" onClick={() => openModal('Paru')} style={{ cursor: 'pointer', opacity: 0 }} />
+        <circle cx="455" cy="430" r="20" fill="red" onClick={() => openModal('Ucayali')} style={{ cursor: 'pointer', opacity: 0 }} />
+      </svg>
       </div>
     </div>
     </>

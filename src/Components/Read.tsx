@@ -23,17 +23,13 @@ const Read: React.FC<ReadProps> = ({ origin, closeModal }) => {
   const [selectedFishId, setSelectedFishId] = useState<number | null>(null);
   const navigate = useNavigate();
 
-  const fetchFish = async (origin?: string) => {
-    let url = 'http://localhost:4000/all';
-    if (origin && origin !== 'all') {
-      url = `http://localhost:4000/origin?origin=${origin}`;
-    }
-    const res = await axios.get<Fish[]>(url);
-    setFish(res.data);
+  const fetchFish = async () => {
+    const res = await axios.get<Fish[]>('http://localhost:4000/all');
+    setFish(res.data.filter((fish) => origin === 'all' || fish.origin === origin));
   };
 
   useEffect(() => {
-    fetchFish(origin);
+    fetchFish();
   }, [origin]);
 
   const handleFishClick = (id: number) => {
@@ -71,7 +67,7 @@ const Read: React.FC<ReadProps> = ({ origin, closeModal }) => {
           style={{ maxHeight: `${modalHeight}px`, overflowY: 'auto' }}
         >
           <div className="modal-header text-center">
-            <h2 className="text-lg font-serif">{origin}</h2>
+            <h2 className="text-lg font-serif font-bold">Apistogrammas from {origin} River</h2>
           </div>
           <div className="flex-1 mb-4">
           {fish
