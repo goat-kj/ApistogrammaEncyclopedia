@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Modal from 'react-modal';
-import axios from 'axios';
-
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import Modal from "react-modal";
+import axios from "axios";
+import "../App.css";
 
 interface ReadProps {
   origin: string;
@@ -16,7 +16,7 @@ interface Fish {
   size: string;
   pH: string;
   image: string;
-};
+}
 
 const Read: React.FC<ReadProps> = ({ origin, closeModal }) => {
   const [fish, setFish] = useState<Fish[]>([]);
@@ -24,8 +24,10 @@ const Read: React.FC<ReadProps> = ({ origin, closeModal }) => {
   const navigate = useNavigate();
 
   const fetchFish = async () => {
-    const res = await axios.get<Fish[]>('http://localhost:4000/all');
-    setFish(res.data.filter((fish) => origin === 'all' || fish.origin === origin));
+    const res = await axios.get<Fish[]>("http://localhost:4000/all");
+    setFish(
+      res.data.filter((fish) => origin === "all" || fish.origin === origin)
+    );
   };
 
   useEffect(() => {
@@ -51,8 +53,8 @@ const Read: React.FC<ReadProps> = ({ origin, closeModal }) => {
       navigate(`/delete/${selectedFishId}`);
     }
   };
-  
-  const modalHeight = 100 + (fish.length * 180);
+
+  const modalHeight = 100 + fish.length * 180;
 
   return (
     <>
@@ -63,44 +65,47 @@ const Read: React.FC<ReadProps> = ({ origin, closeModal }) => {
         onRequestClose={closeModal}
       >
         <div
-          className="bg-white rounded-lg shadow-lg p-6 w-1/2 h-1/2 relative flex flex-col"
-          style={{ maxHeight: `${modalHeight}px`, overflowY: 'auto' }}
+          className="bg-white rounded-lg shadow-lg p-6 modal-container relative flex flex-col"
+          style={{ maxHeight: `${modalHeight}px`, overflowY: "auto" }}
         >
           <div className="modal-header text-center">
-            <h2 className="text-lg font-serif font-bold">Apistogrammas from {origin} River</h2>
+            <h2 className="text-lg font-serif font-bold">
+              Apistogrammas from {origin} River
+            </h2>
           </div>
-          <div className="flex-1 mb-4">
-          {fish
-  .filter((fish) => origin === 'all' || fish.origin === origin)
-  .map((fish) => (
-    <button
-      key={fish.id}
-      className={`flex flex-row justify-center items-center mt-6 shadow-md bg-gray-100 hover:bg-gray-200 ${
-        selectedFishId === fish.id ? 'bg-gray-200' : ''
-      }`}
-      onClick={() => handleFishClick(fish.id)}
-    >
-      <div className="w-1/2 p-6">
-        <img
-          src={fish.image}
-          alt="Fish"
-          className="w-300 h-300 rounded-full"
-        />
-      </div>
-      <div className="w-1/2 p-6">
-        <h2 className="text-xl font-bold mb-2">{fish.name}</h2>
-        <p className="text-gray-700 text-base">
-          Origin: {fish.origin} River
-        </p>
-        <p className="text-gray-700 text-base">
-          Size: {fish.size}cm
-        </p>
-        <p className="text-gray-700 text-base">pH: {fish.pH}</p>
-      </div>
-    </button>
-  ))}
+          <div className="flex flex-col">
+            {fish
+              .filter((fish) => origin === "all" || fish.origin === origin)
+              .map((fish) => (
+                <button
+                  key={fish.id}
+                  className={`fish-card justify-center items-center mt-2 mb-2 shadow-md bg-gray-100 hover:bg-gray-200 ${
+                    selectedFishId === fish.id ? "bg-gray-200" : ""
+                  }`}
+                  style={{ minWidth: "90%" }}
+                  onClick={() => handleFishClick(fish.id)}
+                >
+                  <div className="p-3">
+                    <img
+                      src={fish.image}
+                      alt="Fish"
+                      className="fish-image rounded-lg"
+                    />
+                  </div>
+                  <div className="p-3">
+                    <h2 className="text-xl font-bold mb-2">{fish.name}</h2>
+                    <p className="text-gray-700 text-base">
+                      Origin: {fish.origin} River
+                    </p>
+                    <p className="text-gray-700 text-base">
+                      Size: {fish.size}cm
+                    </p>
+                    <p className="text-gray-700 text-base">pH: {fish.pH}</p>
+                  </div>
+                </button>
+              ))}
           </div>
-          <div className="flex justify-center">
+          <div className="flex justify-center mt-2">
             <button
               className="bg-black hover:bg-gray-800 text-white font-bold py-2 px-4 rounded mr-4"
               onClick={handleUpdateClick}
