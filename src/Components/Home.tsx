@@ -36,7 +36,7 @@ const Home = () => {
             type="button"
             onClick={toggleAccordion}
           >
-            {accordionIsOpen ? "Hide" : "Click for Info"}
+            {accordionIsOpen ? "Hide" : "What Are Apistogrammas?"}
           </button>
           <div
             style={{

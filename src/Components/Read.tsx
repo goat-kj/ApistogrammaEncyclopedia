@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Modal from "react-modal";
 import axios from "axios";
+import { useRecoilValue } from "recoil";
+import { isLoggedInState } from "./Atom";
 import "../App.css";
 
 interface ReadProps {
@@ -22,6 +24,7 @@ const Read: React.FC<ReadProps> = ({ origin, closeModal }) => {
   const [fish, setFish] = useState<Fish[]>([]);
   const [selectedFishId, setSelectedFishId] = useState<number | null>(null);
   const navigate = useNavigate();
+  const isLoggedIn = useRecoilValue(isLoggedInState);
 
   const fetchFish = async () => {
     const res = await axios.get<Fish[]>("http://localhost:4000/all");
@@ -64,16 +67,15 @@ const Read: React.FC<ReadProps> = ({ origin, closeModal }) => {
         className="fixed inset-0 flex items-center justify-center"
         onRequestClose={closeModal}
       >
-        <div
-          className="bg-white rounded-lg shadow-lg p-6 modal-container relative flex flex-col"
-          style={{ maxHeight: `${modalHeight}px`, overflowY: "auto" }}
-        >
-          <div className="modal-header text-center">
+        <div className="bg-white rounded-lg shadow-lg modal-container relative flex flex-col">
+          <div className="modal-header text-center sticky top-0 py-8 bg-white">
             <h2 className="text-lg font-serif font-bold">
-              Apistogrammas from {origin} River
+              {origin === "all"
+                ? "Showing Apistogrammas from All Rivers"
+                : `Showing Apistogrammas from ${origin} River`}
             </h2>
           </div>
-          <div className="flex flex-col">
+          <div className="flex flex-col items-center">
             {fish
               .filter((fish) => origin === "all" || fish.origin === origin)
               .map((fish) => (
@@ -82,7 +84,7 @@ const Read: React.FC<ReadProps> = ({ origin, closeModal }) => {
                   className={`fish-card justify-center items-center mt-2 mb-2 shadow-md bg-gray-100 hover:bg-gray-200 ${
                     selectedFishId === fish.id ? "bg-gray-200" : ""
                   }`}
-                  style={{ minWidth: "90%" }}
+                  style={{ minWidth: "80%", maxWidth: "90%" }}
                   onClick={() => handleFishClick(fish.id)}
                 >
                   <div className="p-3">
@@ -105,19 +107,28 @@ const Read: React.FC<ReadProps> = ({ origin, closeModal }) => {
                 </button>
               ))}
           </div>
-          <div className="flex justify-center mt-2">
-            <button
-              className="bg-black hover:bg-gray-800 text-white font-bold py-2 px-4 rounded mr-4"
-              onClick={handleUpdateClick}
-            >
-              Update
-            </button>
-            <button
-              className="bg-black hover:bg-gray-800 text-white font-bold py-2 px-4 rounded mr-4"
-              onClick={handleDeleteClick}
-            >
-              Delete
-            </button>
+          <div className="modal-footer flex justify-center mt-2 sticky bottom-0 py-8 bg-white">
+            {isLoggedIn ? (
+              <>
+                <button
+                  className={`${
+                    selectedFishId === null ? "bg-gray-200" : "bg-black"
+                  } hover:bg-gray-800 text-white font-bold py-2 px-4 rounded mr-4`}
+                  onClick={handleUpdateClick}
+                >
+                  Update
+                </button>
+                <button
+                  className={`${
+                    selectedFishId === null ? "bg-gray-200" : "bg-black"
+                  } hover:bg-gray-800 text-white font-bold py-2 px-4 rounded mr-4`}
+                  onClick={handleDeleteClick}
+                >
+                  Delete
+                </button>
+              </>
+            ) : null}
+
             <button
               className="bg-black hover:bg-gray-800 text-white font-bold py-2 px-4 rounded"
               onClick={closeModal}

@@ -71,6 +71,7 @@ const Update: React.FC = () => {
             : fish
         );
         setFishList(updatedFishList);
+        window.alert("Fish has been successfully updated.");
         navigate("/");
       }
     } catch (error) {

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 interface Fish {
   name: string;
@@ -23,6 +24,8 @@ const Create: React.FC = () => {
     setFish({ ...fish, [name]: value });
   };
 
+  const navigate = useNavigate();
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     axios
@@ -30,7 +33,7 @@ const Create: React.FC = () => {
       .then((response) => {
         console.log(response.data);
         alert('Fish created successfully!');
-        window.location.href = '/';
+        navigate('/');
       })
       .catch((error) => {
         console.error(error);
@@ -97,6 +100,12 @@ const Create: React.FC = () => {
           className="bg-black hover:bg-gray-800 text-white font-bold py-2 px-4 rounded"
         >
           Create
+        </button>
+        <button
+          className="bg-black hover:bg-gray-800 text-white font-bold py-2 px-4 rounded"
+          onClick={() => navigate('/')}
+        >
+          Cancel
         </button>
       </form>
     </div>

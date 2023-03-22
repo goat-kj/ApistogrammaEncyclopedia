@@ -8,16 +8,16 @@ interface Fish {
   size: string;
   pH: string;
   image: string;
-};
+}
 
 interface RouteParams {
   id: string;
   [key: string]: string | undefined;
-};
+}
 
 const Delete: React.FC = () => {
   const { id } = useParams<RouteParams>();
-  const fishId = id ?? '';
+  const fishId = id ?? "";
   const navigate = useNavigate();
 
   const handleDelete = async () => {
@@ -26,6 +26,7 @@ const Delete: React.FC = () => {
         method: "DELETE",
       });
       if (response.ok) {
+        window.alert("Fish has been successfully deleted.");
         navigate("/");
       } else {
         console.error(`Failed to delete fish with id: ${fishId}`);
